@@ -11,13 +11,21 @@ st.set_page_config(
 # DATABASE
 # ==============================
 
+# Lokasi folder utama repositori GitHub
+BASE_DIR = Path(__file__).resolve().parent
+
+# Folder database berada satu tingkat dengan app.py
+DATABASE_DIR = BASE_DIR / "database"
+st.sidebar.write("Lokasi database:", DATABASE_DIR)
+st.sidebar.write("Isi folder:", list(DATABASE_DIR.glob("*")))
+
 def baca_file(nama_file):
-    file_path = Path("database") / nama_file
+    file_path = DATABASE_DIR / nama_file
 
     if file_path.exists():
         return file_path.read_text(encoding="utf-8")
 
-    return "File belum ditemukan."
+    return f"File belum ditemukan: {file_path}"
 
 
 materi_lho = baca_file(
